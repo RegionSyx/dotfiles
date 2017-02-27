@@ -9,14 +9,19 @@ EXTRA_DIR="$HOME/.extra"
 # Update dotfiles itself first
 
 [ -d "$DOTFILES_DIR/.git" ] && git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" pull origin master
+[ -d "$DOTFILES_DIR/.git" ] && git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" submodule update
 
 # Bunch of symlinks
 
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" ~
 ln -sfv "$DOTFILES_DIR/tmux/.tmux.conf" ~
+ln -sfv "$DOTFILES_DIR/zsh/.zshrc" ~
 ln -sfv "$DOTFILES_DIR/vim" ~/.vim
 
-# Package managers & packages
+# zsh setup
+chsh -s /bin/zsh
+
+## Package managers & packages
 
 #install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
