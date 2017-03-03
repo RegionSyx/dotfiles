@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+
 
 # Get current dir (so run this script from anywhere)
 
@@ -25,7 +25,7 @@ ln -sfv "$DOTFILES_DIR/vim" ~/.vim
 #install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install macvim --with-override-system-vim
+#brew install macvim --with-override-system-vim
 brew unlink gdbm && brew link gdbm
 brew install python
 brew install python3
@@ -33,7 +33,7 @@ brew install hub
 brew install zsh zsh-completions
 
 # zsh setup
-chsh -s /usr/local/bin/zsh
+chsh -s /bin/zsh
 
 #install brew-cask
 
@@ -50,6 +50,10 @@ google-chrome
 slack
 spotify
 virtualbox
+iterm2
+postico
+postman
+docker
 )
 
 brew cask install "${apps[@]}"
