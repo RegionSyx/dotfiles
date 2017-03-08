@@ -54,6 +54,8 @@ iterm2
 postico
 postman
 docker
+docker-toolbox
+yed
 )
 
 brew cask install "${apps[@]}"
@@ -62,6 +64,10 @@ brew cask install "${apps[@]}"
 # (https://github.com/sindresorhus/quick-look-plugins)
 
 source osxdefaults.sh
+
+pip install jedi
+pip install ropevim
+pip install awscli
 
 
 # Install extra stuff
