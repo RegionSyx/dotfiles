@@ -56,6 +56,7 @@ postman
 docker
 docker-toolbox
 yed
+caffeine
 )
 
 brew cask install "${apps[@]}"
