@@ -31,6 +31,7 @@ brew install python
 brew install python3
 brew install hub
 brew install zsh zsh-completions
+brew install tmux
 
 # zsh setup
 chsh -s /bin/zsh

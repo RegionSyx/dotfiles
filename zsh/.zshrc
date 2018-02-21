@@ -83,3 +83,37 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export PATH="/usr/local/opt/go@1.7/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+source /usr/local/bin/virtualenvwrapper.sh
+
+tm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+     tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
+# This is the same functionality as fzf's ctrl-t, except that the file or
+# directory selected is now automatically cd'ed or opened, respectively.
+fzf-open-file-or-dir() {
+  local cmd="command find -L . \
+    \\( -path '*/\\.*' -o -fstype 'dev' -o -fstype 'proc' \\) -prune \
+    -o -type f -print \
+    -o -type d -print \
+    -o -type l -print 2> /dev/null | sed 1d | cut -b3-"
+  local out=$(eval $cmd | fzf-tmux --exit-0)
+
+  if [ -f "$out" ]; then
+    vim "$out" < /dev/tty
+  elif [ -d "$out" ]; then
+    cd "$out"
+    zle reset-prompt
+  fi
+}
+zle     -N   fzf-open-file-or-dir
+bindkey '^t' fzf-open-file-or-dir
+
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
